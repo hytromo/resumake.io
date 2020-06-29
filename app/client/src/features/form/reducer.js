@@ -259,7 +259,83 @@ function form(state: FormState = initialState, action: Action): FormState {
           ]
         }
       }
-    }
+	}
+	
+
+
+
+    case 'ADD_VOLUNTEERING': {
+		return {
+		  ...state,
+		  values: {
+			...state.values,
+			volunteering: [...state.values.volunteering, { highlights: [''] }]
+		  }
+		}
+	  }
+  
+	  case 'REMOVE_VOLUNTEERING': {
+		if (state.values.volunteering.length <= 1) {
+		  return state
+		}
+  
+		return {
+		  ...state,
+		  values: {
+			...state.values,
+			volunteering: state.values.volunteering.slice(0, -1)
+		  }
+		}
+	  }
+  
+	  case 'ADD_VOLUNTEERING_HIGHLIGHT': {
+		return {
+		  ...state,
+		  values: {
+			...state.values,
+			volunteering: [
+			  ...state.values.volunteering.slice(0, action.index),
+			  {
+				...state.values.volunteering[action.index],
+				highlights: [...state.values.volunteering[action.index].highlights, '']
+			  },
+			  ...state.values.volunteering.slice(action.index + 1)
+			]
+		  }
+		}
+	  }
+  
+	  case 'REMOVE_VOLUNTEERING_HIGHLIGHT': {
+		if (
+		  !state.values.work[action.index] ||
+		  !state.values.work[action.index].highlights ||
+		  state.values.work[action.index].highlights.length <= 1
+		) {
+		  return state
+		}
+  
+		return {
+		  ...state,
+		  values: {
+			...state.values,
+			work: [
+			  ...state.values.work.slice(0, action.index),
+			  {
+				...state.values.work[action.index],
+				highlights: state.values.work[action.index].highlights.slice(
+				  0,
+				  -1
+				)
+			  },
+			  ...state.values.work.slice(action.index + 1)
+			]
+		  }
+		}
+	  }
+
+
+
+
 
     case 'ADD_SKILL': {
       return {

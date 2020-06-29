@@ -108,7 +108,7 @@ class Form extends Component<Props> {
             <Route exact path="/generator/skills" component={Skills} />
             <Route exact path="/generator/projects" component={Projects} />
             <Route exact path="/generator/awards" component={Awards} />
-            <Route exact path="/generator/volunteering" component={() => <Work volunteering />} />
+            <Route exact path="/generator/volunteering" component={() => <Work isVolunteering />} />
             <Route exact path="/generator/papers" component={() => <Projects isPapers />} />
             <Route exact path="/generator/mobile-preview" component={Preview} />
             <Route path="*" render={() => <h1 style={{ margin: 0 }}>404</h1>} />

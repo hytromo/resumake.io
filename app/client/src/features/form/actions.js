@@ -122,6 +122,34 @@ function removeJobHighlight(index: number): Action {
   }
 }
 
+
+function addVolunteering(): Action {
+	return {
+	  type: 'ADD_VOLUNTEERING'
+	}
+  }
+  
+  function removeVolunteering(): Action {
+	return {
+	  type: 'REMOVE_VOLUNTEERING'
+	}
+  }
+  
+  function addVolunteeringHighlight(index: number): Action {
+	return {
+	  type: 'ADD_VOLUNTEERING_HIGHLIGHT',
+	  index
+	}
+  }
+  
+  function removeVolunteeringHighlight(index: number): Action {
+	return {
+	  type: 'REMOVE_VOLUNTEERING_HIGHLIGHT',
+	  index
+	}
+  }
+  
+
 function addSkill(): Action {
   return {
     type: 'ADD_SKILL'
@@ -225,5 +253,9 @@ export {
   removeProjectKeyword,
   addAward,
   removeAward,
-  uploadFileAndGenerateResume
+  uploadFileAndGenerateResume,
+  addVolunteering,
+removeVolunteering,
+addVolunteeringHighlight,
+removeVolunteeringHighlight
 }

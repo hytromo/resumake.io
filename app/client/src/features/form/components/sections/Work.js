@@ -12,15 +12,20 @@ import {
   addJob,
   removeJob,
   addJobHighlight,
-  removeJobHighlight
+  removeJobHighlight,
+  addVolunteering,
+  removeVolunteering,
+  addVolunteeringHighlight,
+  removeVolunteeringHighlight
 } from '../../actions'
 import type { FormValues } from '../../types'
 import type { State } from '../../../../app/types'
 
 type Props = {
   work: $PropertyType<FormValues, 'work'>,
+  volunteering: $PropertyType<FormValues, 'volunteering'>,
   jobCount: number,
-  volunteering: boolean,
+  isVolunteering: boolean,
   jobHighlights: Array<number>,
   addJob: () => void,
   removeJob: () => void,
@@ -31,23 +36,27 @@ type Props = {
 function Work({
   work,
   volunteering,
+  isVolunteering,
   addJob,
   removeJob,
   addJobHighlight,
-  removeJobHighlight
+  removeJobHighlight,
+  addVolunteeringHighlight,
+  removeVolunteeringHighlight
 }: Props) {
+	const entries = isVolunteering ? volunteering : work;
   return (
-    <Section heading={volunteering ? "Any volunteering work you have done" : "Your Work Experience"}>
+    <Section heading={isVolunteering ? "Any volunteering work you have done" : "Your Work Experience"}>
       <LabeledInput
-        name={`headings.${volunteering ? 'volunteering': 'work'}`}
+        name={`headings.${isVolunteering ? 'volunteering': 'work'}`}
         label="Section Heading"
-        placeholder={volunteering ? "Volunteering" : "Work Experience"}
+        placeholder={isVolunteering ? "Volunteering" : "Work Experience"}
       />
       <Divider />
-      {work.map((job, i) => (
+      {entries.map((job, i) => (
         <Job
 		  key={i}
-		  volunteering={volunteering}
+		  volunteering={isVolunteering}
           index={i}
           highlights={job.highlights}
           addHighlight={addJobHighlight}
@@ -55,10 +64,10 @@ function Work({
         />
       ))}
       <Button onClick={addJob} type="button">
-        Add {volunteering ? 'Volunteering' : 'Job'}
+        Add {isVolunteering ? 'Volunteering' : 'Job'}
       </Button>
       <Button onClick={removeJob} disabled={work.length === 1} type="button">
-        Remove {volunteering ? 'Volunteering' : 'Job'}
+        Remove {isVolunteering ? 'Volunteering' : 'Job'}
       </Button>
     </Section>
   )
@@ -66,7 +75,8 @@ function Work({
 
 function mapState(state: State) {
   return {
-    work: state.form.resume.values.work
+	work: state.form.resume.values.work,
+	volunteering: state.form.resume.values.volunteering,
   }
 }
 
@@ -74,7 +84,11 @@ const mapActions = {
   addJob,
   removeJob,
   addJobHighlight,
-  removeJobHighlight
+  removeJobHighlight,
+  addVolunteering,
+  removeVolunteering,
+  addVolunteeringHighlight,
+  removeVolunteeringHighlight
 }
 
 export default connect(mapState, mapActions)(Work)
