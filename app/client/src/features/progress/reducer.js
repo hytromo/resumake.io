@@ -17,11 +17,14 @@ const initialState = {
     'work',
     'skills',
     'projects',
-    'awards'
+	'awards',
+	'volunteering',
+	'papers'
   ]
 }
 
 function progress(state: State = initialState, action: Action): State {
+	console.log('state is', state)
   switch (action.type) {
     case 'SET_SECTION_ORDER':
       return {

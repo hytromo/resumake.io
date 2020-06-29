@@ -20,7 +20,9 @@ describe('progress reducer', () => {
         'work',
         'skills',
         'projects',
-        'awards'
+		'awards',
+		'volunteering',
+		'papers'
       ]
     }
 
@@ -31,7 +33,9 @@ describe('progress reducer', () => {
       'education',
       'skills',
       'projects',
-      'awards'
+	  'awards',
+	  'volunteering',
+	  'papers'
     ]
 
     const expected: State = {
@@ -63,7 +67,9 @@ describe('progress reducer', () => {
         'work',
         'skills',
         'projects',
-        'awards'
+		'awards',
+		'volunteering',
+		'papers'
       ]
     }
 

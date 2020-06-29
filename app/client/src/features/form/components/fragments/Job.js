@@ -30,46 +30,49 @@ const MiniInput = Input.extend`
 
 type Props = {
   highlights: Array<?string>,
+  volunteering: boolean,
   index: number,
   addHighlight: (index: number) => void,
   removeHighlight: (index: number) => void
 }
 
-function Job({ highlights, index, addHighlight, removeHighlight }: Props) {
+function Job({ highlights, index, addHighlight, removeHighlight, volunteering }: Props) {
+	const description = volunteering ? 'Volunteering' : 'Job';
+	const dataPrefix = volunteering ? 'volunteering' : 'work';
   return (
     <div>
       {index > 0 ? <Divider /> : null}
       <LabeledInput
-        name={`work[${index}].company`}
+        name={`${dataPrefix}[${index}].company`}
         label="Company Name"
-        placeholder="Google"
+        placeholder={volunteering ? 'Doctors Without Borders' : 'Google'}
       />
       <LabeledInput
-        name={`work[${index}].position`}
-        label="Job Title"
+        name={`${dataPrefix}[${index}].position`}
+        label={`${description} Title`}
         placeholder="Software Engineer"
       />
       <LabeledInput
-        name={`work[${index}].location`}
-        label="Job Location"
+        name={`${dataPrefix}[${index}].location`}
+        label={`${volunteering ? '' : 'Job'} Location`}
         placeholder="Mountain View, CA"
       />
       <LabeledInput
-        name={`work[${index}].startDate`}
+        name={`${dataPrefix}[${index}].startDate`}
         label="Start Date"
         placeholder="May 2015"
       />
       <LabeledInput
-        name={`work[${index}].endDate`}
+        name={`${dataPrefix}[${index}].endDate`}
         label="End Date"
         placeholder="May 2017 / Present / Etc."
       />
-      <Label>Job Responsibilities</Label>
+      <Label>{volunteering ? 'Volunteering' : 'Job'} Responsibilities</Label>
       {highlights.map((highlight, i) => (
         <Row key={i}>
           <MiniInput
             type="text"
-            name={`work[${index}].highlights[${i}]`}
+            name={`${dataPrefix}[${index}].highlights[${i}]`}
             placeholder="Did cool stuff at company"
             component="input"
           />

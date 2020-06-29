@@ -12,7 +12,9 @@ const sections = [
   'work',
   'skills',
   'projects',
-  'awards'
+  'awards',
+  'volunteering',
+  'papers'
 ]
 
 describe('actions', () => {

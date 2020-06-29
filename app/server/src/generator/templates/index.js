@@ -95,6 +95,7 @@ function getTemplateData(data: SanitizedValues): TemplateData {
       }
 
     case TEMPLATE7:
+		console.log('for template 7 data is', data)
       return {
         texDoc: template7(data),
         opts: {

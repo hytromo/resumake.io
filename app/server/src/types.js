@@ -10,6 +10,8 @@ type Section =
   | 'skills'
   | 'projects'
   | 'awards'
+  |	'volunteering'
+  | 'papers'
 
 type Headings = {
   work?: string,

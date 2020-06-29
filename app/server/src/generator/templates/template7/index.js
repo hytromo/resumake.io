@@ -252,7 +252,9 @@ function template7(values: SanitizedValues) {
             )
 
           case 'work':
-            return generator.workSection(values.work, headings.work)
+			return generator.workSection(values.work, headings.work)
+		case 'volunteering':
+			return generator.workSection(values.volunteering, headings.volunteering || 'Volunteering')
 
           case 'skills':
             return generator.skillsSection(values.skills, headings.skills)

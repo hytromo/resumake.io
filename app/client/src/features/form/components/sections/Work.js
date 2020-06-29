@@ -20,6 +20,7 @@ import type { State } from '../../../../app/types'
 type Props = {
   work: $PropertyType<FormValues, 'work'>,
   jobCount: number,
+  volunteering: boolean,
   jobHighlights: Array<number>,
   addJob: () => void,
   removeJob: () => void,
@@ -29,22 +30,24 @@ type Props = {
 
 function Work({
   work,
+  volunteering,
   addJob,
   removeJob,
   addJobHighlight,
   removeJobHighlight
 }: Props) {
   return (
-    <Section heading="Your Work Experience">
+    <Section heading={volunteering ? "Any volunteering work you have done" : "Your Work Experience"}>
       <LabeledInput
-        name="headings.work"
+        name={`headings.${volunteering ? 'volunteering': 'work'}`}
         label="Section Heading"
-        placeholder="Work Experience"
+        placeholder={volunteering ? "Volunteering" : "Work Experience"}
       />
       <Divider />
       {work.map((job, i) => (
         <Job
-          key={i}
+		  key={i}
+		  volunteering={volunteering}
           index={i}
           highlights={job.highlights}
           addHighlight={addJobHighlight}
@@ -52,10 +55,10 @@ function Work({
         />
       ))}
       <Button onClick={addJob} type="button">
-        Add Job
+        Add {volunteering ? 'Volunteering' : 'Job'}
       </Button>
       <Button onClick={removeJob} disabled={work.length === 1} type="button">
-        Remove Job
+        Remove {volunteering ? 'Volunteering' : 'Job'}
       </Button>
     </Section>
   )

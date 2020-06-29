@@ -70,7 +70,9 @@ class SideNav extends Component<Props> {
   }
 
   render() {
-    const { sections } = this.props
+	const { sections } = this.props
+	
+	console.log('sections is', sections)
 
     return (
       <Aside>
