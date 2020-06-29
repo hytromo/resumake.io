@@ -48,7 +48,18 @@ const initialState = {
         endDate: '',
         highlights: ['']
       }
-    ],
+	],
+	volunteering: [
+		{
+		  company: '',
+		  location: '',
+		  position: '',
+		  website: '',
+		  startDate: '',
+		  endDate: '',
+		  highlights: ['']
+		}
+	  ],
     skills: [
       {
         name: '',
@@ -63,7 +74,15 @@ const initialState = {
         url: '',
         keywords: ['']
       }
-    ],
+	],
+	papers: [
+		{
+		  name: '',
+		  description: '',
+		  url: '',
+		  keywords: ['']
+		}
+	  ],
     awards: [
       {
         title: '',
@@ -335,7 +354,32 @@ function form(state: FormState = initialState, action: Action): FormState {
           projects: state.values.projects.slice(0, -1)
         }
       }
-    }
+	}
+	
+	case 'ADD_PAPER': {
+		console.log('calling action!', state.values.papers)
+		return {
+		  ...state,
+		  values: {
+			...state.values,
+			papers: [...state.values.papers, { keywords: [''] }]
+		  }
+		}
+	  }
+  
+	  case 'REMOVE_PAPER': {
+		if (state.values.papers.length <= 1) {
+		  return state
+		}
+  
+		return {
+		  ...state,
+		  values: {
+			...state.values,
+			papers: state.values.papers.slice(0, -1)
+		  }
+		}
+	  }
 
     case 'ADD_PROJECT_KEYWORD': {
       return {

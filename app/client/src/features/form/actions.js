@@ -160,6 +160,19 @@ function removeProject(): Action {
   }
 }
 
+function addPaper(): Action {
+	return {
+	  type: 'ADD_PAPER'
+	}
+  }
+  
+  function removePaper(): Action {
+	return {
+	  type: 'REMOVE_PAPER'
+	}
+  }
+  
+
 function addProjectKeyword(index: number): Action {
   return {
     type: 'ADD_PROJECT_KEYWORD',
@@ -206,6 +219,8 @@ export {
   removeSkillKeyword,
   addProject,
   removeProject,
+  addPaper,
+  removePaper,
   addProjectKeyword,
   removeProjectKeyword,
   addAward,

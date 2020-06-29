@@ -66,9 +66,11 @@ type FormValues = {
   headings: Headings,
   basics: Basics,
   work: Array<Job>,
+  volunteering: Array<Job>,
   education: Array<School>,
   skills: Array<Skill>,
   projects: Array<Project>,
+  papers: Array<Project>,
   awards: Array<Award>
 }
 

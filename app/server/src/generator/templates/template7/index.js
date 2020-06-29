@@ -161,7 +161,7 @@ const generator: Template7Generator = {
             {}
             {${name || ''}}
             {}
-            {\\textit{${keywords.join(', ')}}}
+            {${keywords.length ? `\\textit{${keywords.join(', ')}}` : ``}}
             {}
             {${detailsLine}}
           \\vspace{1mm}
@@ -260,7 +260,9 @@ function template7(values: SanitizedValues) {
             return generator.skillsSection(values.skills, headings.skills)
 
           case 'projects':
-            return generator.projectsSection(values.projects, headings.projects)
+			return generator.projectsSection(values.projects, headings.projects)
+		case 'papers':
+			return generator.projectsSection(values.papers, headings.papers || 'Papers')
 
           case 'awards':
             return generator.awardsSection(values.awards, headings.awards)

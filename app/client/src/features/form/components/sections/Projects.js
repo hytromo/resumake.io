@@ -11,14 +11,19 @@ import { Project } from '..'
 import {
   addProject,
   removeProject,
+  addPaper,
+  removePaper,
   addProjectKeyword,
   removeProjectKeyword
 } from '../../actions'
 import type { FormValues } from '../../types'
 import type { State } from '../../../../app/types'
+import { titleCase } from '../../../../common/utils'
 
 type Props = {
   projects: $PropertyType<FormValues, 'projects'>,
+  papers: $PropertyType<FormValues, 'papers'>,
+  isPapers: boolean;
   addProject: () => void,
   removeProject: () => void,
   addProjectKeyword: (index: number) => void,
@@ -27,38 +32,45 @@ type Props = {
 
 function Projects({
   projects,
+  isPapers,
+  papers,
   addProject,
   removeProject,
+  addPaper,
+  removePaper,
   addProjectKeyword,
   removeProjectKeyword
 }: Props) {
+	const description = isPapers ? 'papers' : 'projects';
+	const entries = (isPapers ? papers: projects) || [];
   return (
-    <Section heading="Your Projects">
+    <Section heading={`Your ${isPapers ? 'Paper' : 'Project'}s`}>
       <LabeledInput
-        name="headings.projects"
+        name={`headings.${description}`}
         label="Section Heading"
-        placeholder="Projects"
+        placeholder={titleCase(description)}
       />
       <Divider />
-      {projects.map((project, i) => (
+      {entries.map((entry, i) => (
         <Project
           key={i}
           index={i}
-          keywords={project.keywords}
+          keywords={entry.keywords}
           addKeyword={addProjectKeyword}
-          removeKeyword={removeProjectKeyword}
+		  removeKeyword={removeProjectKeyword}
+		  isPapers={isPapers}
         />
       ))}
       <div>
-        <Button onClick={addProject} type="button">
-          Add Project
+        <Button onClick={isPapers ? addPaper : addProject} type="button">
+          Add {titleCase(description)}
         </Button>
         <Button
-          onClick={removeProject}
-          disabled={projects.length === 1}
+          onClick={isPapers ? removePaper : removeProject}
+          disabled={entries.length === 1}
           type="button"
         >
-          Remove Project
+          Remove {titleCase(description)}
         </Button>
       </div>
     </Section>
@@ -67,13 +79,16 @@ function Projects({
 
 function mapState(state: State) {
   return {
-    projects: state.form.resume.values.projects
+    projects: state.form.resume.values.projects,
+    papers: state.form.resume.values.papers,
   }
 }
 
 const mapActions = {
   addProject,
   removeProject,
+  addPaper,
+  removePaper,
   addProjectKeyword,
   removeProjectKeyword
 }

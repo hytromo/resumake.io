@@ -24,27 +24,29 @@ const MiniInput = Input.extend`
 
 type Props = {
   keywords: Array<?string>,
+  isPapers: boolean;
   index: number,
   addKeyword: (index: number) => void,
   removeKeyword: (index: number) => void
 }
 
-function Project({ keywords, index, addKeyword, removeKeyword }: Props) {
+function Project({ keywords, index, addKeyword, removeKeyword, isPapers }: Props) {
+	const prefix = isPapers ? 'papers' : 'projects';
   return (
     <div>
       {index > 0 ? <Divider /> : null}
       <LabeledInput
-        name={`projects[${index}].name`}
-        label="Project Name"
+        name={`${prefix}[${index}].name`}
+        label={`${isPapers ? 'Paper' : 'Project'} Name`}
         placeholder="Piper Chat"
       />
       <LabeledInput
-        name={`projects[${index}].description`}
+        name={`${prefix}[${index}].description`}
         label="Project Description"
         placeholder="A video chat app with great picture quality."
       />
       <LabeledInput
-        name={`projects[${index}].url`}
+        name={`${prefix}[${index}].url`}
         label="Link to Project"
         placeholder="http://piperchat.com"
       />
@@ -52,7 +54,7 @@ function Project({ keywords, index, addKeyword, removeKeyword }: Props) {
       {keywords.map((_, i) => (
         <div key={i}>
           <MiniInput
-            name={`projects[${index}].keywords[${i}]`}
+            name={`${prefix}[${index}].keywords[${i}]`}
             placeholder="Java"
             component="input"
           />
