@@ -8,6 +8,7 @@
     "url": "http://saadq.com"
   },
   "scripts": {
+    "create-cv": "cp  ~/Projects/personal/me/public/cv.json /tmp && node ./app/server/lib/index.js create && mv /tmp/cv.pdf ~/Projects/personal/me/public/",
     "build": "npm run build:client && npm run build:server",
     "start": "npm run start:client & npm run start:server",
     "lint": "npm run lint:client && npm run lint:server",
